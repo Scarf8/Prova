@@ -1,0 +1,10 @@
+[
+    {
+        "isbn": 1,
+        "titulo": "Livro 1",
+        "autor": "Machado de Assis",
+        "ano": 1990,
+        "tema":"Política",
+        "alugado":true
+    }
+]
