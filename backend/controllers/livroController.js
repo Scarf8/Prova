@@ -4,7 +4,7 @@ class livroController {
     async salvar(req, res) {
         let livro = req.body;
         const max = await livroModel.findOne({}).sort({ codigo: -1 });
-        livro.isbn = max == null ? 1 : max.isbn + 1;
+        livro.id = max == null ? 1 : max.id + 1;
         const resultado = await livroModel.create(livro);
         res.status(201).json(resultado);
     }
@@ -14,23 +14,23 @@ class livroController {
         res.status(200).json(resultado);
     }
 
-    async buscarPorisbn(req, res) {
-        const isbn = req.params.isbn;
-        const resultado = await livroModel.findOne({ 'isbn': isbn });
+    async buscarPorid(req, res) {
+        const id = req.params.id;
+        const resultado = await livroModel.findOne({ 'isbn': id });
         res.status(200).json(resultado);
     }
 
     async atualizar(req, res) {
-        const isbn = req.params.isbn;
-        const _isbn = String((await livroModel.findOne({ 'isbn': isbn }))._isbn);
-        await livroModel.findByisbnAndUpdate(String(_isbn), req.body);
+        const id = req.params.id;
+        const _id = String((await livroModel.findOne({ 'isbn': id }))._id);
+        await livroModel.findByidAndUpdate(String(_id), req.body);
         res.status(200).send();
     }
 
     async excluir(req, res) {
-        const isbn = req.params.isbn;
-        const _isbn = String((await livroModel.findOne({ 'isbn': isbn }))._isbn);
-        await livroModel.findByidAndRemove(String(_isbn));
+        const id = req.params.id;
+        const _id = String((await livroModel.findOne({ 'isbn': id }))._id);
+        await livroModel.findByidAndRemove(String(_id));
         res.status(200).send();
     }
 }
